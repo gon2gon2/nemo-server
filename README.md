@@ -2,15 +2,15 @@
 
 ## 최초 프로젝트 설정(최초 한번만)
 1. 저장소를 클론합니다.
-`git clone https://github.com/FiveNemos/nemo-express.git`
+    - `git clone https://github.com/FiveNemos/nemo-express.git`
 
 2. 클론한 저장소를 컨테이너에서 돌립니다.
-`docker run -itd -p 3000:3000 --restart=always -v /home/gon2gon2/Nemo/nemo-express:/express --name=api node:lts`
-`docker exec -it api /bin/bash`
+    - `docker run -itd -p 3000:3000 --restart=always -v {클론한 프로젝트 경로}/nemo-express:/nemo-express --name=api node:lts`
+    - `docker exec -it api /bin/bash`
 
 3. 의존성을 설치합니다.
-`cd nemo-express`
-`npm install`
+    - `cd nemo-express`
+    - `npm install`
 
 4. 터미널을 종료합니다.
 
@@ -24,16 +24,16 @@
 
 ## 프로젝트(서버) 실행하는 법
 1. `DEBUG=myapp:* npm start`
-2. localhost:3000 접속하면 응답이 옵니다.
+2. 브라우저로 localhost:3000 접속하면 응답이 옵니다.
 
 
 ## Project Structure
 ```
-├── app.js
+├── app.js 
 ├── bin
 ├── node_modules
 ├── package.json
-├── package-lock.jsonㅀㅀ
+├── package-lock.json
 ├── public
 ├── README.md
 ├── routes
