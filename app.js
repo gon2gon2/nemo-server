@@ -4,10 +4,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
-const userRouter = require('./routes/user');
-const cardRouter = require('./routes/card');
-const profileRouter = require('./routes/profile');
+// import routers
+const userRouter = require('./routes/user.routes');
+const cardRouter = require('./routes/card.routes');
+const profileRouter = require('./routes/profile.routes');
 
 const app = express();
 
@@ -21,10 +21,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/user', userRouter);
-app.use('/card', cardRouter);
-app.use('/profile', profileRouter);
+// apply router
+userRouter(app);
+cardRouter(app);
+profileRouter(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -42,4 +42,15 @@ app.use((err, req, res) => {
   res.render('error');
 });
 
+// database
+const db = require('./models');
+
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log('Synced db.');
+  })
+  .catch(err => {
+    console.log(`Failed to sync db: ${  err.message}`);
+  });
 module.exports = app;
