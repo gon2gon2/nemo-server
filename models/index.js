@@ -1,6 +1,11 @@
 import Sequelize from 'sequelize';
 import dbConfig from '../config/db.config.js';
 
+// 우리가 정의한 모델들(테이블)
+import User from './user.model.js'
+import Card from './card.model.js'
+import Tag from './tag.model.js'
+
 const sequelize = new Sequelize({
   username: dbConfig.USER,
   password: dbConfig.PASSWORD,
@@ -13,11 +18,6 @@ const sequelize = new Sequelize({
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
-
-// 우리가 정의한 모델들(테이블)
-import User from './user.model.js'
-import Card from './card.model.js'
-import Tag from './tag.model.js'
 db.User = User(sequelize, Sequelize);
 db.card = Card(sequelize, Sequelize);
 db.tag = Tag(sequelize, Sequelize);
