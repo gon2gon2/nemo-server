@@ -1,6 +1,7 @@
 {
-  "name": "express",
-  "version": "0.0.0",
+  "type": "module",
+  "name": "nemo-express",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",

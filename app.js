@@ -1,14 +1,17 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import cookieParser from 'cookie-parser';
+import createError from 'http-errors';
+import { fileURLToPath } from 'url';
+import express from 'express'
+import logger from 'morgan';
+import path from 'path'
 
 // import routers
-const userRouter = require('./routes/user.routes');
-const cardRouter = require('./routes/card.routes');
-const profileRouter = require('./routes/profile.routes');
+import userRouter from './routes/user.routes.js';
+import cardRouter from './routes/card.routes.js';
+import profileRouter from './routes/profile.routes.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 // view engine setup
@@ -43,7 +46,7 @@ app.use((err, req, res) => {
 });
 
 // database
-// const db = require('./models');
+// import db from './models/index.js';
 
 /* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
   테이블 구조 바뀌었을 때만 실행해주면 되는 것 같다.
@@ -57,4 +60,4 @@ app.use((err, req, res) => {
 //     console.log(`Failed to sync db: ${  err.message}`);
 //   });
 
-module.exports = app;
+export default app;

@@ -1,15 +1,15 @@
-const db = require('../models');
-
+import db from '../models/index.js';
 const {User} = db;
+const Controller = {};
 // const {Op} = db.Sequelize;
 
-exports.findAll = (req, res) => {
+Controller.findAll = (req, res) => {
   User.findAll().then(data => {
     res.send(data);
   });
 };
 
-exports.create = (req, res) => {
+Controller.create = (req, res) => {
   const user = {
     friends: '2,3,4,5,',
     account_name: '정글러버',
@@ -27,3 +27,4 @@ exports.create = (req, res) => {
       });
     });
 };
+export default Controller;

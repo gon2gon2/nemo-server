@@ -1,9 +1,9 @@
-// const db = require('../models');
-
-// const {Profile} = db;
-// const {Op} = db.Sequelize;
+// import db from '../models/index.js';
+const Controller = {};
 
 // Create and Save a new user
-exports.create = (req, res) => {
+Controller.create = (req, res) => {
   res.send('create profile');
 };
+
+export default Controller;
