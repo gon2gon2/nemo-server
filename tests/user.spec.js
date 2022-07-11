@@ -16,3 +16,29 @@ it('POST /api/user/signup 성공 시 201', (done) => {
             done();
         })})
 
+/* 로그인 테스트 */
+it('POST /api/user/login 성공 시 200', (done) => {
+    request(app)
+        .post('/api/user/login')
+        .set("Content-Type", "application/json")
+        .send({
+            account_name:"고니고니",
+            password: 'spahspah!!!'
+        })
+        .then((response) => {
+            expect(response.statusCode).toBe(200);
+            done();
+        })})
+
+it('POST /api/user/login 성공 시 user_id', (done) => {
+    request(app)
+        .post('/api/user/login')
+        .set("Content-Type", "application/json")
+        .send({
+            account_name:"고니고니",
+            password: 'spahspah!!!'
+        })
+        .then((response) => {
+            expect(response.body.user_id).toBe(1);
+            done();
+        })})
