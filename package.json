@@ -8,7 +8,7 @@
     "dev": "nodemon ./bin/www",
     "eslint": "./node_modules/.bin/eslint --fix",
     "format": "prettier --write",
-    "test": "jest --detectOpenHandles"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
