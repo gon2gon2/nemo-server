@@ -1,7 +1,18 @@
 # nemo-express
 - 네모의 API 서버입니다.
 
-## 옵션 1 - 도커로 프로젝트 설정하기
+## 옵션 1 - 로컬 node 사용하여 개발하기
+0. nvm을 설치합니다.
+   - 맥: `brew install nvm`
+1. `nvm install --lts`
+2. `nvm use --lts`
+3. 저장소를 클론합니다.
+   - `git clone https://github.com/FiveNemos/nemo-express.git`
+4. 패키지를 설치합니다.
+   - `cd nemo-express`
+   - `npm install`
+
+## 옵션 2 - 도커로 프로젝트 설정하기
 1. 저장소를 클론합니다.
    - `git clone https://github.com/FiveNemos/nemo-express.git`
 
@@ -22,16 +33,6 @@
 4. Attach Visual Studio Code를 클릭합니다.
 5. 새롭게 열린 vscode에서 코드를 수정합니다.
 
-## 옵션 2 - 로컬 node 사용하여 개발하기
-0. nvm을 설치합니다.
-   - 맥: `brew install nvm`
-1. `nvm install --lts`
-2. `nvm use --lts`
-3. 저장소를 클론합니다.
-   - `git clone https://github.com/FiveNemos/nemo-express.git`
-4. 패키지를 설치합니다.
-   - `cd nemo-express`
-   - `npm install`
 
 ## 개발하기
 1. `npm run dev`
