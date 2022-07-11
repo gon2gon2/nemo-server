@@ -1,5 +1,5 @@
 ---
-name: feature_request
+name: new feature 템플릿
 about: new feature
 title: "[feat]"
 labels: feature
