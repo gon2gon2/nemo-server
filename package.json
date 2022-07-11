@@ -1,13 +1,14 @@
 {
-  "name": "express",
-  "version": "0.0.0",
+  "type": "module",
+  "name": "nemo-express",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
     "eslint": "./node_modules/.bin/eslint --fix",
     "format": "prettier --write",
-    "test": "jest --detectOpenHandles"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
