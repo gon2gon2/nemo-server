@@ -1,4 +1,5 @@
 import db from '../models/index.js';
+
 const {User} = db;
 const Controller = {};
 // const {Op} = db.Sequelize;
@@ -10,20 +11,23 @@ Controller.findAll = (req, res) => {
 };
 
 Controller.create = (req, res) => {
+  const {body} = req;
   const user = {
-    friends: '2,3,4,5,',
-    account_name: '정글러버',
-    password: '1likejungle!',
-    phone_number: '010-2222-4333',
-  };
-
+    friends: "",
+    account_name: body.account_name,
+    password: body.password,
+    phone_number: body.phone_number,
+  }
   User.create(user)
-    .then(data => {
-      res.send(data);
+    .then(() => {
+      res.status(201).send({
+        result : "success"
+      });
     })
-    .catch(err => {
+    .catch(() => {
       res.status(500).send({
-        message: err.message || 'some error',
+        result: "fail"
+        // message: err.message || 'some error',
       });
     });
 };
