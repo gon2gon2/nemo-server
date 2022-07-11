@@ -10,7 +10,8 @@ export default app => {
 
   router.get('/', users.findAll);
 
-  router.post('/signup', users.create);
+  router.post('/signup', users.signup);
+  router.post('/login', users.login);
 
   app.use('/api/user', router);
 };
