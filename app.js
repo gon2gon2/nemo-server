@@ -43,14 +43,18 @@ app.use((err, req, res) => {
 });
 
 // database
-const db = require('./models');
+// const db = require('./models');
 
-db.sequelize
-  .sync()
-  .then(() => {
-    console.log('Synced db.');
-  })
-  .catch(err => {
-    console.log(`Failed to sync db: ${  err.message}`);
-  });
+/* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
+  테이블 구조 바뀌었을 때만 실행해주면 되는 것 같다.
+  */
+// db.sequelize
+//   .sync()
+//   .then(() => {
+//     console.log('Synced db.');
+//   })
+//   .catch(err => {
+//     console.log(`Failed to sync db: ${  err.message}`);
+//   });
+
 module.exports = app;
