@@ -22,8 +22,8 @@ it('POST /api/user/login 성공 시 200', (done) => {
         .post('/api/user/login')
         .set("Content-Type", "application/json")
         .send({
-            account_name:"고니고니",
-            password: 'spahspah!!!'
+            account_name:"셋",
+            password: '789'
         })
         .then((response) => {
             expect(response.statusCode).toBe(200);
@@ -35,10 +35,10 @@ it('POST /api/user/login 성공 시 user_id', (done) => {
         .post('/api/user/login')
         .set("Content-Type", "application/json")
         .send({
-            account_name:"고니고니",
-            password: 'spahspah!!!'
+            account_name:"셋",
+            password: '789'
         })
         .then((response) => {
-            expect(response.body.user_id).toBe(1);
+            expect(response.body.user_id).toBe(3);
             done();
         })})

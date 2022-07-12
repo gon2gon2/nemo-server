@@ -4,70 +4,24 @@ const {User} = db;
 const Controller = {};
 // const {Op} = db.Sequelize;
 
-Controller.findAll = (req, res) => {
-  User.findAll().then(data => {
-    res.send(data);
-  });
-};
 
-Controller.signup = (req, res) => {
-  const {body} = req;
-  const user = {
-    friends: "",
-    account_name: body.account_name,
-    password: body.password,
-    phone_number: body.phone_number,
+Controller.create = (data) => {
+  const { account_name, password, phone_number } = data;
+  // 중복 생성 안 되게 하는 로직 추가 필요
+  const friends = "";
+  const new_user = User.create({friends, account_name, password, phone_number});
+  if (!new_user) {
+    return false;
   }
-  User.create(user)
-    .then(() => {
-      res.status(201).send({
-        result : "success"
-      });
-    })
-    .catch(() => {
-      res.status(500).send({
-        result: "fail"
-        // message: err.message || 'some error',
-      });
-    });
-};
+  return new_user.id
+}
 
-Controller.login = (req, res) => {
-
-  const {account_name, password} = req.body;
-  // console.log("계정", account_name);
-  // console.log("비번", password);
-  User.findAll({
-    where: {
-      account_name
-    }
+Controller.findWithAccountName = (account_name) => {
+  const founded_user = User.findOne({where: {account_name}});
+  if (!founded_user){
+    return false;
   }
-  ).then((data) => {
-    if (!data.length) {
-      res.status(404).send({
-        result: "Not found",
-        message: "ID가 잘못되었습니다."
-      })
-    }
-    else if (data[0].password !== password){
-      res.status(401).send({
-        result: "wrong password",
-        message: "pw가 잘못되었습니다."
-      })
-    }
-    else {
-      // int는 못 보낸다 -> object로 바꿔서 전송
-      res.status(200).send({
-        result: "success",
-        user_id: data[0].id
-      });
-    }
-  })
-  .catch(()=> {
-    res.status(404).send({
-      result:"fail"
-    })
-  })
+  return founded_user;
 }
 
 export default Controller;

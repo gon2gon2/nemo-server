@@ -6,9 +6,9 @@ import logger from 'morgan';
 import path from 'path'
 
 // import routers
-import userRouter from './routes/user.routes.js';
-import cardRouter from './routes/card.routes.js';
-import profileRouter from './routes/profile.routes.js';
+import userService from './services/user.service.js';
+import cardService from './services/card.service.js';
+import profileService from './services/profile.service.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,9 +25,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // apply router
-userRouter(app);
-cardRouter(app);
-profileRouter(app);
+userService(app);
+cardService(app);
+profileService(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
