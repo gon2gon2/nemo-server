@@ -19,7 +19,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.User = User(sequelize, Sequelize);
-db.card = Card(sequelize, Sequelize);
-db.tag = Tag(sequelize, Sequelize);
+db.Card = Card(sequelize, Sequelize);
+db.Tag = Tag(sequelize, Sequelize);
 
 export default db;

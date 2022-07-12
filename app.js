@@ -45,11 +45,11 @@ app.use((err, req, res) => {
   res.render('error');
 });
 // database
-// import db from './models/index.js';
-
 /* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
   테이블 구조 바뀌었을 때만 실행해주면 되는 것 같다.
   */
+
+// import db from './models/index.js';
 // db.sequelize
 //   .sync()
 //   .then(() => {
