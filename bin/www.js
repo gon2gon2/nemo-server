@@ -5,6 +5,7 @@
  */
 
   import http from 'http';
+  import fs from 'fs';
   import app from '../app.js';
   
   /**
@@ -73,6 +74,8 @@ const onError = (error) => {
 const onListening = () => {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  const dir = './uploads';
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir);
   console.log(`Listening on ${bind}`);
 };
 
