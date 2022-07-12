@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  db:
+    image: mysql
+    volumes:
+      - /opt/lib/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=spahspah123
+    ports:
+      - 5342:3306
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./uploads:/uploads
+    depends_on:
+      - db
