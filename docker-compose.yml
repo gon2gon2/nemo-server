@@ -19,7 +19,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./uploads:/uploads
+      - ./uploads:/nemo/uploads
       - ./config:/nemo/config
       - ./app.js:/nemo/app.js
       - ./services:/nemo/services
