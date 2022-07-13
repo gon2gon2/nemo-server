@@ -9,6 +9,7 @@ import path from 'path'
 import userService from './services/user.service.js';
 import cardService from './services/card.service.js';
 import profileService from './services/profile.service.js';
+import tempService from './services/temp.service.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 userService(app);
 cardService(app);
 profileService(app);
+tempService(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

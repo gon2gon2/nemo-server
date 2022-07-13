@@ -30,10 +30,5 @@ export default app => {
     }
   })
 
-  // 임시용
-  // router.get('/tag/:', async (req, res) => {
-    // const is_already = tags.
-  // })
-
   app.use('/api/card', router);
 };
