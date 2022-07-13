@@ -23,4 +23,13 @@ Controller.findWithName = (tag_name) => {
   return founded_tag;
 }
 
+// 태그아이디 -> 태그명
+Controller.findWithId = (tag_id) => {
+  const founded_tag = Tag.findOne({where: {"id": tag_id}}) 
+  if (!founded_tag){
+    return false
+  }
+  return founded_tag;
+}
+
 export default Controller;
