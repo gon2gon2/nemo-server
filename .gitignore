@@ -11,8 +11,8 @@ coverage
 # Benchmarking
 benchmarks/graphs
 
-# config
-config
+# .env
+.env
 
 #for mac
 .DS_Store

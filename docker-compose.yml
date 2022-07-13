@@ -2,10 +2,10 @@ version: '3.7'
 services:
   db:
     image: mysql
-    volumes:
-      - /opt/lib/mysql:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=spahspah123
+    # volumes:
+      # - /opt/lib/mysql:/var/lib/mysql
+    env_file:
+      - ./config/.env
     ports:
       - 5342:3306
 
@@ -13,10 +13,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - ./config/.env
     restart: always
     ports:
       - 3000:3000
     volumes:
       - ./uploads:/uploads
+      - ./config:/nemo/config
+      - ./app.js:/nemo/app.js
+      - ./services:/nemo/services
+      - ./controllers:/nemo/controllers
     depends_on:
       - db
