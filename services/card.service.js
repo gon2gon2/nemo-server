@@ -22,7 +22,7 @@ export default app => {
     tag_id_2 = tag_id_2 ? tag_id_2.id : tags.create(tag_2);
     tag_id_3 = tag_id_3 ? tag_id_3.id : tags.create(tag_3);
 
-    const img_url = req.file.path;
+    const img_url = req.file.filename;
     const succ = await Card.create({user_id, nickname, tag_id_1, tag_id_2, tag_id_3, intro, img_url})
     if (succ){
       res.status(201).send("success")
