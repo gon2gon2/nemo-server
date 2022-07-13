@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import tags from '../controllers/tag.controller.js';
+import users from '../controllers/user.controller.js'
 import db from '../models/index.js'
 import upload from './multer.js'
 
@@ -28,6 +29,12 @@ export default app => {
     } else{
       res.status(404).send("fail");
     }
+  })
+
+  router.get('/:user_id', async (req, res) => {
+    const {user_id} = req.params;
+    const result = await users.findFriends(user_id);
+    res.send(result)
   })
 
   app.use('/api/card', router);
