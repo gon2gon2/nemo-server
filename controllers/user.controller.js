@@ -5,19 +5,19 @@ const Controller = {};
 const {Op} = db.Sequelize;
 
 
-Controller.create = (data) => {
+Controller.create = async (data) => {
   const { account_name, password, phone_number } = data;
   // 중복 생성 안 되게 하는 로직 추가 필요
   const friends = "";
-  const new_user = User.create({friends, account_name, password, phone_number});
+  const new_user = await User.create({friends, account_name, password, phone_number});
   if (!new_user) {
     return false;
   }
   return new_user.id
 }
 
-Controller.findWithAccountName = (account_name) => {
-  const founded_user = User.findOne({where: {account_name}});
+Controller.findWithAccountName = async (account_name) => {
+  const founded_user = await User.findOne({where: {account_name}});
   if (!founded_user){
     return false;
   }
@@ -39,6 +39,7 @@ Controller.findFriends = async (account_id) => {
     const tagObj_1 = await Tag.findOne({where: {id: tag_id_1}})
     const tagObj_2 = await Tag.findOne({where: {id: tag_id_2}})
     const tagObj_3 = await Tag.findOne({where: {id: tag_id_3}})
+
 
     const tag_1 = tagObj_1.tag_name;
     const tag_2 = tagObj_2.tag_name;
