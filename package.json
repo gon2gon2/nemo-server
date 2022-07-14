@@ -8,7 +8,8 @@
     "dev": "nodemon ./bin/www",
     "eslint": "./node_modules/.bin/eslint --fix",
     "format": "prettier --write",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "sequelize": "./node_modules/.bin/sequelize"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -32,6 +33,7 @@
     "lint-staged": "^13.0.3",
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
+    "sequelize-cli": "^6.4.1",
     "supertest": "^6.2.4"
   },
   "husky": {
