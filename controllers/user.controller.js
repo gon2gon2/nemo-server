@@ -9,11 +9,14 @@ Controller.create = async (data) => {
   const { account_name, password, phone_number } = data;
   // 중복 생성 안 되게 하는 로직 추가 필요
   const friends = "";
+  if (!account_name | !password | !phone_number) {
+    return false;
+  }
   const new_user = await User.create({friends, account_name, password, phone_number});
   if (!new_user) {
     return false;
   }
-  return new_user.id
+  return true;
 }
 
 Controller.findWithAccountName = async (account_name) => {

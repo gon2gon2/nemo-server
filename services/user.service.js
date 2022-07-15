@@ -11,8 +11,12 @@ export default app => {
   /* 회원가입 */
   router.post('/signup', async (req, res) => {
     const {body} = req;
-    const user = await users.create(body);
-    res.status(201).send(user);
+    const result = await users.create(body);
+    if (result) {
+      res.status(201).send({"result": "success"})
+    } else {
+      res.status(400).send({"result": "fail"})
+    }
   });
 
 
