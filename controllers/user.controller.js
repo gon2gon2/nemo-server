@@ -16,6 +16,7 @@ Controller.create = async (data) => {
   if (!new_user) {
     return false;
   }
+  // return new_user.dataValues.id;
   return true;
 }
 

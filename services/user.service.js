@@ -13,6 +13,8 @@ export default app => {
     const {body} = req;
     const result = await users.create(body);
     if (result) {
+      // const user_id = result;
+      // res.status(201).send({"result": "success", user_id})
       res.status(201).send({"result": "success"})
     } else {
       res.status(400).send({"result": "fail"})
