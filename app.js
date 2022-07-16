@@ -11,6 +11,8 @@ import cardService from './services/card.service.js';
 import profileService from './services/profile.service.js';
 import tempService from './services/temp.service.js'
 import friendService from './services/friend.service.js';
+
+import db from './models/index.js';
 // database
 /* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
   테이블 구조 바뀌었을 때만 실행해주면 되는 것 같다.
@@ -53,15 +55,13 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// import db from './models/index.js';
-// db.sequelize
-//   .sync({force: true})  
-//   .then(() => {
-//     console.log('Synced db.');
-//   })
-//   .catch(err => {
-//     console.log(`Failed to sync db: ${  err.message}`);
-//   });
+db.sequelize
+  .sync()  
+  .then(() => {
+    console.log('Synced db.');
+  })
+  .catch(err => {
+    console.log(`Failed to sync db: ${  err.message}`);
+  });
 
 export default app;
