@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import tags from '../controllers/tag.controller.js';
-import users from '../controllers/user.controller.js'
+import connections from '../controllers/connection.controller.js'
 import cards from '../controllers/card.controller.js'
 import db from '../models/index.js'
 import upload from './multer.js'
@@ -32,16 +32,23 @@ export default app => {
     }
   })
 
-  router.get('/my/:user_id', async (req, res)=>{
+  // 개별 명함
+  router.get('/:user_id', async (req, res)=>{
     const {user_id} = req.params;
     const result = await cards.findWithUserId(user_id);
     res.send(result)
   })
 
-  router.get('/:user_id', async (req, res) => {
+  // 친구들 정보 불러오기
+  router.get('/all/:user_id', async (req, res) => {
     const {user_id} = req.params;
-    const result = await users.findFriends(user_id);
-    res.send(result)
+    const ids = await connections.findAllFriendsId(user_id);
+    if (!ids.length) {
+      res.send("no friend")
+    } else {
+      const allCards = await cards.findCards(ids);
+      res.send(allCards)
+    }
   })
 
   app.use('/api/card', router);

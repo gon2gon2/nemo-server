@@ -1,5 +1,3 @@
-import { DataTypes } from "sequelize/types";
-
 export default (sequelize, Sequelize) => {
   const Connection = sequelize.define('connection', {
     id: {
@@ -8,17 +6,18 @@ export default (sequelize, Sequelize) => {
       primaryKey: true,
     },
     user_id_1: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     user_id_2: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     connection_date: {
-      type: Sequelize.DATETIME,
-      defaultValue: DataTypes.NOW
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }
-  });
+  },
+  );
   return Connection;
 };
