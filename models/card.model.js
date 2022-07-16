@@ -9,14 +9,17 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    tag_id_1: {
-      type: Sequelize.INTEGER,
+    tag_1: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
-    tag_id_2: {
-      type: Sequelize.INTEGER,
+    tag_2: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
-    tag_id_3: {
-      type: Sequelize.INTEGER,
+    tag_3: {
+      type: Sequelize.STRING,
+      allowNull: false,
     },
     nickname: {
       type: Sequelize.STRING,
