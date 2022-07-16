@@ -10,6 +10,7 @@ import userService from './services/user.service.js';
 import cardService from './services/card.service.js';
 import profileService from './services/profile.service.js';
 import tempService from './services/temp.service.js'
+import friendService from './services/friend.service.js';
 // database
 /* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
   테이블 구조 바뀌었을 때만 실행해주면 되는 것 같다.
@@ -35,6 +36,7 @@ userService(app);
 cardService(app);
 profileService(app);
 tempService(app);
+friendService(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -54,7 +56,7 @@ app.use((err, req, res) => {
 
 // import db from './models/index.js';
 // db.sequelize
-//   .sync()
+//   .sync({force: true})  
 //   .then(() => {
 //     console.log('Synced db.');
 //   })

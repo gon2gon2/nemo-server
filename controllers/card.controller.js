@@ -22,4 +22,9 @@ Controller.findWithUserId = async (user_id) => {
   return foundedCard;
 }
 
+Controller.findCards = async (ids) => {
+  const allCards = await Card.findAll({where: {'user_id': ids}})
+  return allCards;
+}
+
 export default Controller;
