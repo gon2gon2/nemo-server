@@ -14,7 +14,7 @@ services:
   api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
     environment:
       - NODE_ENV=development
     env_file:
@@ -24,6 +24,11 @@ services:
       - 3000:3000
     volumes:
       - ./uploads:/nemo/uploads
+      - ./services:/nemo/services
+      - ./models:/nemo/models
+      - ./controllers:/nemo/controllers
+      - ./bin:/nemo/bin
+      - ./app.js:/nemo/app.js
     depends_on:
           - db
 
