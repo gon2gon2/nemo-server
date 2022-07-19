@@ -1,14 +1,26 @@
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+import cookieParser from 'cookie-parser';
+import createError from 'http-errors';
+import { fileURLToPath } from 'url';
+import express from 'express'
+import logger from 'morgan';
+import path from 'path'
 
 // import routers
-const userRouter = require('./routes/user.routes');
-const cardRouter = require('./routes/card.routes');
-const profileRouter = require('./routes/profile.routes');
+import userService from './services/user.service.js';
+import cardService from './services/card.service.js';
+import profileService from './services/profile.service.js';
+import tempService from './services/temp.service.js'
+import friendService from './services/friend.service.js';
 
+import db from './models/index.js';
+// database
+/* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
+  테이블 구조 바뀌었을 때만 실행해주면 되는 것 같다.
+  */
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 
 // view engine setup
@@ -19,12 +31,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static',express.static(path.join(__dirname, '/uploads')));
 
 // apply router
-userRouter(app);
-cardRouter(app);
-profileRouter(app);
+userService(app);
+cardService(app);
+profileService(app);
+tempService(app);
+friendService(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -41,16 +55,13 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// database
-const db = require('./models');
-
 db.sequelize
-  .sync()
+  .sync()  
   .then(() => {
     console.log('Synced db.');
   })
   .catch(err => {
     console.log(`Failed to sync db: ${  err.message}`);
   });
-module.exports = app;
+
+export default app;

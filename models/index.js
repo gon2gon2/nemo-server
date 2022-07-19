@@ -1,5 +1,10 @@
-const Sequelize = require('sequelize');
-const dbConfig = require('../config/db.config');
+import Sequelize from 'sequelize';
+import dbConfig from '../config/db.config.js';
+
+// 우리가 정의한 모델들(테이블)
+import User from './user.model.js'
+import Card from './card.model.js'
+import Connection from './connection.model.js'
 
 const sequelize = new Sequelize({
   username: dbConfig.USER,
@@ -13,10 +18,8 @@ const sequelize = new Sequelize({
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.User = User(sequelize, Sequelize);
+db.Card = Card(sequelize, Sequelize);
+db.Connection = Connection(sequelize, Sequelize);
 
-// 우리가 정의한 모델들(테이블)
-db.User = require('./user.model')(sequelize, Sequelize);
-db.Card = require('./card.model')(sequelize, Sequelize);
-db.Tag = require('./tag.model')(sequelize, Sequelize);
-
-module.exports = db; // exports인데 export로 써서 에러남 ㅋㅋ
+export default db;
