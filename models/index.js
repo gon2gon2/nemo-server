@@ -13,6 +13,7 @@ const sequelize = new Sequelize({
   port: dbConfig.PORT,
   dialect: dbConfig.DIALECT,
   database: dbConfig.DATABASE,
+  timezone: "+09:00", 
 });
 
 const db = {};
