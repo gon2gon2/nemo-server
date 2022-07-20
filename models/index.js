@@ -6,6 +6,8 @@ import User from './user.model.js'
 import Card from './card.model.js'
 import Connection from './connection.model.js'
 
+const sqlLog = process.env.NODE_ENV !== 'test';
+
 const sequelize = new Sequelize({
   username: dbConfig.USER,
   password: dbConfig.PASSWORD,
@@ -14,6 +16,7 @@ const sequelize = new Sequelize({
   dialect: dbConfig.DIALECT,
   database: dbConfig.DATABASE,
   timezone: "+09:00", 
+  logging: sqlLog
 });
 
 const db = {};
