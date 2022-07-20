@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  db:
+    image: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./config/timezone:/etc/timezone
+    environment:
+      - MYSQL_ROOT_PASSWORD=spahxptmxm
+      - MYSQL_DATABASE=test_base
+    ports:
+      - 5342:3306
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./config/.env
+    restart: always
+    ports:
+      - 3000:3000
+    volumes:
+      - ./uploads:/nemo/uploads
+      - ./services:/nemo/services
+      - ./models:/nemo/models
+      - ./controllers:/nemo/controllers
+      - ./bin:/nemo/bin
+      - ./app.js:/nemo/app.js
+    depends_on:
+          - db
+
+volumes:
+  mysql-data:
