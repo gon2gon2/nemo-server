@@ -16,4 +16,6 @@ jobs:
       with:
         node-version: 'lts/gallium'
     - run: npm i
+    - run: echo $NODE_ENV
+    - run: echo $TEST_HOST
     - run: npm run test
