@@ -12,12 +12,12 @@ export default app => {
   router.post('/signup', async (req, res) => {
     const {body} = req;
     const result = await users.create(body);
-    if (result) {
+    if (result[0]) {
       // const user_id = result;
       // res.status(201).send({"result": "success", user_id})
-      res.status(201).send({"result": "success"})
+      res.status(201).send({"result": "success", "id":result[1]})
     } else {
-      res.status(400).send({"result": "fail"})
+      res.status(400).send({"result": "fail", "msg":result[1]})
     }
   });
 
