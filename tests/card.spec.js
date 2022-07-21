@@ -1,11 +1,13 @@
-
 import request from 'supertest';
 import app from "../app.js";
+import TIMELIMIT from './const.js'
+import db from '../models'
 
+beforeAll( async() => await db.Card.destroy({where: {}}))
 
 describe('/api/card에서는 ', () => {
     /* 명함 생성 테스트 */
-    it('POST /create 성공 시 201', (done) => {
+    test('POST /create 성공 시 201', (done) => {
         request(app)
             .post('/api/card/create')
             .set('Content-Type', 'multipart/form-data')
@@ -19,23 +21,23 @@ describe('/api/card에서는 ', () => {
             .then((response) => {
                 expect(response.statusCode).toBe(201);
                 done();
-            })})
+            })}, TIMELIMIT)
 
-    it('GET /all/:user_id를 요청하면 200', (done)=> {
+    test('GET /all/:user_id를 요청하면 200', (done)=> {
         request(app)
             .get('/api/card/all/1')
             .then(res => {
                 expect(res.statusCode).toBe(200);
                 done()
             })
-    })
+    }, TIMELIMIT)
 
-    it('GET /:user_id를 요청하면 200', (done)=> {
+    test('GET /:user_id를 요청하면 200', (done)=> {
         request(app)
             .get('/api/card/1')
             .then(res => {
                 expect(res.statusCode).toBe(200);
                 done()
             })
-    })
+    }, TIMELIMIT)
 })

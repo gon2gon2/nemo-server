@@ -1,16 +1,17 @@
-
 import request from 'supertest';
 import app from "../app.js";
+import TIMELIMIT from './const.js'
+import db from '../models'
 
-const base_url = '/api/friend'
+beforeAll( async() => await db.Connection.destroy({where: {}}))
 
-describe(`${base_url} API에서는`, () => {
-    it('친구 신청을 하면 200', (done)=> {
+describe('/friend API에서는', () => {
+    test('GET 친구 신청을 하면 200', (done)=> {
         request(app)
-            .get(`${base_url}?id_1=987&id_2=678`)
+            .get('/api/friend?id_1=987&id_2=678')
             .then(res => {
                 expect(res.statusCode).toBe(200);
                 done()
             })
-    })
+    }, TIMELIMIT)
 })
