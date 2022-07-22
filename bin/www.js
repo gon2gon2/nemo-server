@@ -79,15 +79,15 @@ const onListening = () => {
   console.log(`Listening on ${bind}`);
 };
 
-  // import db from './models/index.js';
-  // db.sequelize
-  //   .sync()  
-  //   .then(() => {
-  //     console.log('Synced db.');
-  //   })
-  //   .catch(err => {
-  //     console.log(`Failed to sync db: ${  err.message}`);
-  //   });
+  import db from '../models/index.js';
+  db.sequelize
+    .sync()  
+    .then(() => {
+      console.log('Synced db.');
+    })
+    .catch(err => {
+      console.log(`Failed to sync db: ${  err.message}`);
+    });
 /**
   * Listen on provided port, on all network interfaces.
   */
