@@ -7,7 +7,7 @@ const {Op} = db.Sequelize;
 
 Controller.create = async (data) => {
   const { account_name, password, phone_number } = data;
-  const friends = "";
+
   if (!account_name || !password || !phone_number) {
     return [false, "누락된 정보가 있습니다"];
   }
@@ -19,15 +19,9 @@ Controller.create = async (data) => {
   }
 
   const new_user = await User.create({
-    friends,
     account_name,
     password,
     phone_number,
-    'tag_img_url_1':'',
-    'tag_img_url_2':'',
-    'tag_img_url_3':'',
-    'detail_title':'제목을 입력해주세요',
-    'detail_content':'내용을 입력해주세요',
   });
   if (!new_user) {
     return [false, "생성에 실패했습니다. 다시 시도해주세요"];
@@ -55,7 +49,7 @@ Controller.findFriends = async (account_id) => {
 
   const result = [];
   for (let i = 0; i < allCards.length; i += 1){
-    const {nickname, img_url, user_id, intro, tag_id_1, tag_id_2, tag_id_3 } = allCards[i];
+    const {nickname, image, user_id, intro, tag_id_1, tag_id_2, tag_id_3 } = allCards[i];
     const tagObj_1 = await Tag.findOne({where: {id: tag_id_1}})
     const tagObj_2 = await Tag.findOne({where: {id: tag_id_2}})
     const tagObj_3 = await Tag.findOne({where: {id: tag_id_3}})
@@ -68,7 +62,7 @@ Controller.findFriends = async (account_id) => {
     // console.log({tag_id_1, tag_id_2, tag_id_3 });
     const converted = {
       nickname,
-      img_url, 
+      image, 
       user_id,
       intro,
       tag_1,
