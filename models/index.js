@@ -2,9 +2,9 @@ import Sequelize from 'sequelize';
 import dbConfig from '../config/db.config.js';
 
 // 우리가 정의한 모델들(테이블)
-import User from './user.model.js'
-import Card from './card.model.js'
-import Connection from './connection.model.js'
+import User from './user.model.js';
+import Card from './card.model.js';
+import Connection from './connection.model.js';
 
 const sqlLog = process.env.NODE_ENV !== 'test';
 
@@ -15,8 +15,8 @@ const sequelize = new Sequelize({
   port: dbConfig.PORT,
   dialect: dbConfig.DIALECT,
   database: dbConfig.DATABASE,
-  timezone: "+09:00", 
-  logging: sqlLog
+  timezone: '+09:00',
+  logging: sqlLog,
 });
 
 const db = {};

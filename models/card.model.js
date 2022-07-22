@@ -52,7 +52,7 @@ export default (sequelize, Sequelize) => {
     detail_content: {
       type: Sequelize.TEXT,
       allowNull: false,
-    }
+    },
   });
   return Card;
 };
