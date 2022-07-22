@@ -15,6 +15,8 @@ export default app => {
     const {body} = req;
     const result = await users.create(body);
     if (result[0]) {
+      // const user_id = result;
+      // res.status(201).send({"result": "success", user_id})
       res.status(201).send({"result": "success", "id":result[1]})
     } else {
       res.status(400).send({"result": "fail", "msg":result[1]})
@@ -27,7 +29,7 @@ export default app => {
     const {body} = req;
     const user = await users.findWithAccountName(body.account_name);
     if (!user){
-      res.status(404).send("존재하지 않는 아이디입니다.")
+      res.status(404).send("No ID!")
       return;
     }
     const user_data = user.dataValues;
@@ -37,7 +39,7 @@ export default app => {
       res.status(200).send({user_id});
     }
     else { // 비번 다른 경우에도 같은 처리
-      res.status(404).send("비밀번호가 일치하지 않습니다.");
+      res.status(404).send("Not found");
     }
   });
 
