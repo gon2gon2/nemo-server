@@ -5,10 +5,6 @@ export default (sequelize, Sequelize) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    friends: {
-      type: Sequelize.TEXT,
-      allowNull: false,
-    },
     account_name: {
       type: Sequelize.STRING,
       allowNull: false,

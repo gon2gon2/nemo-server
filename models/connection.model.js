@@ -15,9 +15,8 @@ export default (sequelize, Sequelize) => {
     },
     connection_date: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
-    }
-  },
-  );
+      defaultValue: Sequelize.NOW,
+    },
+  });
   return Connection;
 };

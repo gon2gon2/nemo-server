@@ -27,9 +27,31 @@ export default (sequelize, Sequelize) => {
     },
     intro: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
-    img_url: {
+    image: {
       type: Sequelize.STRING,
+      allowNull: false,
+    },
+    tag_img_1: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    tag_img_2: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    tag_img_3: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    detail_title: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    detail_content: {
+      type: Sequelize.TEXT,
+      allowNull: false,
     },
   });
   return Card;
