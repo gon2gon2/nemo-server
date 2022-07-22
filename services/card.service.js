@@ -16,7 +16,7 @@ export default app => {
 
     const succ = await Card.create({user_id, nickname, tag_1, tag_2, tag_3, intro, img_url})
     if (succ){
-      res.status(201).send("success");
+      res.status(201).send("success")
     } else{
       res.status(404).send("fail");
       
@@ -27,7 +27,7 @@ export default app => {
   router.get('/:user_id', async (req, res)=>{
     const {user_id} = req.params;
     const result = await cards.findWithUserId(user_id);
-    res.send(result);
+    res.send(result)
   })
 
   // 친구들 정보 불러오기
@@ -38,7 +38,7 @@ export default app => {
       res.send("no friend")
     } else {
       const allCards = await cards.findCards(ids);
-      res.send({'cards' : allCards, 'friends' : ids});
+      res.send(allCards)
     }
   })
 
