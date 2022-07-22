@@ -1,25 +1,28 @@
 import { Router } from 'express';
 import connections from '../controllers/connection.controller.js'
 import cards from '../controllers/card.controller.js'
-import db from '../models/index.js'
 import upload from './multer.js'
-
-const { Card } = db;
 
 const router = Router();
 
 export default app => {
 
-  router.post('/create', upload.single('image'), async (req, res)=> {
-    const {user_id, nickname, tag_1, tag_2, tag_3, intro} = req.body;
-    const img_url = req.file.filename;
+  router.post('/create', upload.any(), async (req, res)=> {
+    const {user_id,intro, nickname, detail_title, detail_content, tag_1, tag_2, tag_3} = req.body;
 
-    const succ = await Card.create({user_id, nickname, tag_1, tag_2, tag_3, intro, img_url})
-    if (succ){
-      res.status(201).send("success")
-    } else{
+    const data = { user_id, tag_1, tag_2, tag_3, nickname, intro, detail_title, detail_content}
+
+    for (let i = 0; i < req.files.length; i += 1) {
+      const f = req.files[i]
+      data[f.fieldname] = f.filename
+    }
+    
+    const result = await cards.create(data);
+
+    if (result[0]) {
+      res.status(200).send("success");
+    } else {
       res.status(404).send("fail");
-      
     }
   })
 
@@ -42,5 +45,27 @@ export default app => {
     }
   })
 
+  // 카드테이블은 카드대로, 유저정보는 유저대는 업데이트 해줘야 함
+  // 아예 합쳐???
+  router.post('/update', upload.any(), async (req, res)=> {
+
+    const {user_id,intro, nickname, detail_title, detail_content, tag_1, tag_2, tag_3} = req.body;
+
+    const data = { user_id, tag_1, tag_2, tag_3, nickname, intro, detail_title, detail_content}
+
+    for (let i = 0; i < req.files.length; i += 1) {
+      const f = req.files[i];
+      data[f.fieldname] = f.filename;
+    }
+    
+    const result = await cards.updateCard(data);
+
+    if (result[0]) {
+      res.status(200).send("success");
+    } else {
+      res.status(404).send("fail");
+    }
+
+  });
   app.use('/api/card', router);
 };
