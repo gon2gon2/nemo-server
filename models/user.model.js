@@ -21,6 +21,21 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    tag_img_url_1: {
+      type: Sequelize.STRING,
+    },
+    tag_img_url_2: {
+      type: Sequelize.STRING,
+    },
+    tag_img_url_3: {
+      type: Sequelize.STRING,
+    },
+    detail_title: {
+      type: Sequelize.STRING,
+    },
+    detail_content: {
+      type: Sequelize.TEXT,
+    }
   });
   return User;
 };

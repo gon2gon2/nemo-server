@@ -27,4 +27,16 @@ Controller.findCards = async (ids) => {
   return allCards;
 }
 
+Controller.updateCard = async (data) => {
+  const { user_id } = data;
+  const updatedCard = await Card.update(
+    data,
+    {
+      where: {user_id}
+    }
+  )
+  return updatedCard;
+
+}
+
 export default Controller;

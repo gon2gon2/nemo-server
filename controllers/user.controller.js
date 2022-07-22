@@ -8,7 +8,7 @@ const {Op} = db.Sequelize;
 Controller.create = async (data) => {
   const { account_name, password, phone_number } = data;
   const friends = "";
-  if (!account_name | !password | !phone_number) {
+  if (!account_name || !password || !phone_number) {
     return [false, "누락된 정보가 있습니다"];
   }
   
@@ -18,7 +18,17 @@ Controller.create = async (data) => {
     return [false, "이미 존재하는 아이디입니다"];
   }
 
-  const new_user = await User.create({friends, account_name, password, phone_number});
+  const new_user = await User.create({
+    friends,
+    account_name,
+    password,
+    phone_number,
+    'tag_img_url_1':'',
+    'tag_img_url_2':'',
+    'tag_img_url_3':'',
+    'detail_title':'제목을 입력해주세요',
+    'detail_content':'내용을 입력해주세요',
+  });
   if (!new_user) {
     return [false, "생성에 실패했습니다. 다시 시도해주세요"];
   }
@@ -70,6 +80,18 @@ Controller.findFriends = async (account_id) => {
   // founded_user.friends
   // .freinds로 card에서 하나씩 꺼내온다.
   return result;
+}
+
+Controller.updateUser = async (data) => {
+  const { id } = data;
+
+  const updatedUser = await User.update(
+    data,
+    {
+      where: { id }
+    }
+    );
+  return updatedUser
 }
 
 export default Controller;
