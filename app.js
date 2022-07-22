@@ -8,7 +8,6 @@ import path from 'path'
 // import routers
 import userService from './services/user.service.js';
 import cardService from './services/card.service.js';
-import profileService from './services/profile.service.js';
 import tempService from './services/temp.service.js'
 import friendService from './services/friend.service.js';
 
@@ -37,7 +36,6 @@ app.use('/static',express.static(path.join(__dirname, '/uploads')));
 // apply router
 userService(app);
 cardService(app);
-profileService(app);
 tempService(app);
 friendService(app);
 

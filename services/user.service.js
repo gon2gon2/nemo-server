@@ -3,6 +3,8 @@
 
 import { Router } from 'express';
 import users from '../controllers/user.controller.js';
+import cards from '../controllers/card.controller.js'
+import upload from './multer.js'
 
 const router = Router();
 
@@ -38,6 +40,43 @@ export default app => {
     }
     else { // 비번 다른 경우에도 같은 처리
       res.status(404).send("Not found");
+    }
+  });
+
+
+  // 카드테이블은 카드대로, 유저정보는 유저대는 업데이트 해줘야 함
+  // 아예 합쳐???
+  router.post('/update', upload.any(), async (req, res)=> {
+    const {user_id,intro, nickname, detail_title, detail_content, changed, tag_1, tag_2, tag_3} = req.body;
+    const dataForCard = {user_id, tag_1, tag_2, tag_3, nickname, intro}
+    const dataForUser = { detail_title, detail_content}
+    dataForUser.id = user_id;
+    
+    // changed를 0,1,2 인덱싱 하면서 하나씩 update
+    let i = 0;
+    let imgIdx = 0;
+    
+    if(changed[i] === '1') {
+      dataForCard.img_url = req.files[imgIdx].filename;
+    }
+
+    for(i=1; i<4; i+=1){
+      if (changed[i] === '1') {
+        dataForUser[`tag_img_url_${i+1}`] = req.files[imgIdx].filename;
+        imgIdx += 1
+      }
+    }
+    const resultOfUser = await users.updateUser(dataForUser);
+    const resultOfCard = await cards.updateCard(dataForCard)
+
+    if (resultOfUser[0] && resultOfCard[0]) {
+      res.status(200).send("success");
+    } else if (!resultOfUser[0] && resultOfCard[0]) {
+      res.status(404).send("user fail");
+    } else if (resultOfUser[0] && !resultOfCard[0]) {
+      res.status(404).send("card fail");
+    } else {
+      res.status(404).send("all fail");
     }
   });
 
