@@ -36,10 +36,10 @@ export default app => {
 
     const result = await cards.create(data);
 
-    if (result[0]) {
-      res.status(200).send('success');
+    if (result) {
+      res.status(201).send('success');
     } else {
-      res.status(404).send('fail');
+      res.status(400).send('fail');
     }
   });
 
@@ -93,8 +93,9 @@ export default app => {
     }
 
     const result = await cards.updateCard(data);
+    console.log('결과', result);
 
-    if (result[0]) {
+    if (result) {
       res.status(200).send('success');
     } else {
       res.status(404).send('fail');
