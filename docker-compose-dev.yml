@@ -4,7 +4,6 @@ services:
     image: mysql
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./config/timezone:/etc/timezone
     environment:
       - MYSQL_ROOT_PASSWORD=spahxptmxm
       - MYSQL_DATABASE=test_base
