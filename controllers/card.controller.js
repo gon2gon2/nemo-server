@@ -5,10 +5,40 @@ const Controller = {};
 
 // Create and Save a new user
 Controller.create = async data => {
-  // const {user_id, nickname, tag_id_1, tag_id_2, tag_id_3, intro, image, tag_img_1, tag_img_2, tag_img_3, detail_title, detail_content} = data;
+  const {
+    user_id,
+    nickname,
+    tag_1,
+    tag_2,
+    tag_3,
+    intro,
+    image,
+    tag_img_1,
+    tag_img_2,
+    tag_img_3,
+    detail_title,
+    detail_content,
+  } = data;
 
-  // const new_card = await Card.create({user_id, nickname, tag_id_1, tag_id_2, tag_id_3, intro, image, tag_img_1, tag_img_2, tag_img_3, detail_title, detail_content});
-  const new_card = await Card.create(data);
+  const exist = await Card.findOne({ where: { user_id } });
+  if (exist) {
+    return false;
+  }
+
+  const new_card = await Card.create({
+    user_id,
+    nickname,
+    tag_1,
+    tag_2,
+    tag_3,
+    intro,
+    image,
+    tag_img_1,
+    tag_img_2,
+    tag_img_3,
+    detail_title,
+    detail_content,
+  });
 
   if (!new_card) {
     return false;

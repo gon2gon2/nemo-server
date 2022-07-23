@@ -16,6 +16,7 @@ export default (sequelize, Sequelize) => {
     connection_date: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      allowNull: false,
     },
   });
   return Connection;
