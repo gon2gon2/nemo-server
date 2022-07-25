@@ -7,7 +7,6 @@
 import http from 'http';
 import fs from 'fs';
 import app from '../app.js';
-
 import db from '../models/index.js';
 
 /**
@@ -42,6 +41,7 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
+app.io.attach(server);
 
 /**
  * Event listener for HTTP server "error" event.
