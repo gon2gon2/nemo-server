@@ -31,8 +31,8 @@ Controller.isFriend = async (user_id_1, user_id_2) => {
 };
 
 // 친구추가
-Controller.connect = async (user_id_1, user_id_2) => {
-  const result = await Connection.create({ user_id_1, user_id_2 });
+Controller.connect = async (user_id_1, user_id_2, lat, lng) => {
+  const result = await Connection.create({ user_id_1, user_id_2, lat, lng });
 
   if (result) {
     return true;
@@ -50,6 +50,11 @@ Controller.disconnect = async (user_id_1, user_id_2) => {
 Controller.getLength = async () => {
   const allConnection = await Connection.findAll();
   return allConnection.length;
+};
+
+Controller.getAllPos = async () => {
+  const all = await Connection.findAll();
+  return all;
 };
 
 export default Controller;
