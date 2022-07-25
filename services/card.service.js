@@ -93,9 +93,8 @@ export default app => {
     }
 
     const result = await cards.updateCard(data);
-    console.log('결과', result);
 
-    if (result) {
+    if (result[0]) {
       res.status(200).send('success');
     } else {
       res.status(404).send('fail');

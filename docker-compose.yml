@@ -2,6 +2,7 @@ version: '3.7'
 services:
   api:
     image: gcr.io/red-seeker-356107/api:latest
+    container_name: api
     environment:
       - NODE_ENV=production
     env_file:

@@ -18,6 +18,14 @@ export default (sequelize, Sequelize) => {
       defaultValue: Sequelize.NOW,
       allowNull: false,
     },
+    lng: {
+      type: Sequelize.DECIMAL(11, 5),
+      allowNull: false,
+    },
+    lat: {
+      type: Sequelize.DECIMAL(11, 5),
+      allowNull: false,
+    },
   });
   return Connection;
 };
