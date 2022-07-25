@@ -46,21 +46,27 @@ export default app => {
     }
   });
 
+  /* 친구 삭제(내 명함첩에서 삭제) */
   router.get('/delete', async (req, res) => {
     const { id_1, id_2 } = req.query;
 
-    const result_1 = (await connections.isFriend(id_1, id_2))
-      ? await connections.connect(id_1, id_2)
-      : connections.disconnect(id_1, id_2);
-    const result_2 = (await connections.isFriend(id_2, id_1))
-      ? await connections.connect(id_2, id_1)
-      : connections.disconnect(id_2, id_1);
+    const result_1 = !(await connections.isFriend(id_1, id_2)) // 1->2 확인
+      ? true
+      : await connections.disconnect(id_1, id_2);
+    const result_2 = !(await connections.isFriend(id_2, id_1))
+      ? true
+      : await connections.disconnect(id_2, id_1);
 
     if (result_1 && result_2) {
       res.status(200).send({ result: 'success' });
     } else {
       res.status(400).send({ result: 'fail' });
     }
+  });
+
+  router.get('/length-for-test', async (req, res) => {
+    const result = await connections.getLength();
+    res.send({ result });
   });
 
   app.use('/api/friend', router);

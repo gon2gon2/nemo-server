@@ -40,11 +40,16 @@ Controller.connect = async (user_id_1, user_id_2) => {
   return false;
 };
 
-// 친구 삭제(안 됨)
+// 친구 삭제
 Controller.disconnect = async (user_id_1, user_id_2) => {
-  const row = await Connection.destroy({ where: { user_id_1, user_id_2 } });
-  return row;
-  // return row? row.destroy() : false;
+  const result = await Connection.destroy({ where: { user_id_1, user_id_2 } });
+  return result;
+};
+
+// 테스트 코드용
+Controller.getLength = async () => {
+  const allConnection = await Connection.findAll();
+  return allConnection.length;
 };
 
 export default Controller;
