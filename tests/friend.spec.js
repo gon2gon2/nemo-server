@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '../app.js';
-import TIMELIMIT, { USER_ID_1, USER_ID_2 } from './const.js';
+import TIMELIMIT, { USER_ID_1, USER_ID_2, LAT, LNG } from './const.js';
 import db from '../models';
 
 beforeAll(async () => await db.Connection.destroy({ where: {} }));
@@ -11,7 +11,9 @@ describe('/friend API에서는', () => {
       'GET 친구 신청을 하면 200',
       done => {
         request(app)
-          .get(`/api/friend?id_1=${USER_ID_1}&id_2=${USER_ID_2}`)
+          .get(
+            `/api/friend?id_1=${USER_ID_1}&id_2=${USER_ID_2}&lat=${LAT}&lng=${LNG}`,
+          )
           .then(res => {
             expect(res.statusCode).toBe(200);
             done();
@@ -41,7 +43,9 @@ describe('/friend API에서는', () => {
       '/delete에 GET요청을 하면 200',
       done => {
         request(app)
-          .get(`/api/friend/delete?id_1=${USER_ID_1}&id_2=${USER_ID_2}`)
+          .get(
+            `/api/friend/delete?id_1=${USER_ID_1}&id_2=${USER_ID_2}&lat=${LAT}&lng=${LNG}`,
+          )
           .then(res => {
             expect(res.statusCode).toBe(200);
             done();
