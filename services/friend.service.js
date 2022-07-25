@@ -12,14 +12,14 @@ export default app => {
 
   // 쿼리스트링사용
   router.get('/', async (req, res) => {
-    const { id_1, id_2 } = req.query;
+    const { id_1, id_2, lat, lng } = req.query;
 
-    const result_1 = (await connections.isFriend(id_1, id_2))
+    const result_1 = (await connections.isFriend(id_1, id_2, lat, lng))
       ? true
-      : await connections.connect(id_1, id_2);
-    const result_2 = (await connections.isFriend(id_2, id_1))
+      : await connections.connect(id_1, id_2, lat, lng);
+    const result_2 = (await connections.isFriend(id_2, id_1, lat, lng))
       ? true
-      : await connections.connect(id_2, id_1);
+      : await connections.connect(id_2, id_1, lat, lng);
 
     if (result_1 && result_2) {
       res.status(200).send({ result: 'success' });
@@ -62,6 +62,16 @@ export default app => {
     } else {
       res.status(400).send({ result: 'fail' });
     }
+  });
+
+  router.get('/lat', async (req, res) => {
+    const result = await connections.getAllPos();
+
+    const real = result.map(item => {
+      const { user_id_2, lat, lng } = item;
+      return { user_id: user_id_2, lat, lng };
+    }, result);
+    res.send(real);
   });
 
   router.get('/length-for-test', async (req, res) => {
