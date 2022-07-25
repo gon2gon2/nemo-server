@@ -1,48 +1,40 @@
 # nemo-express
 - 네모의 API 서버입니다.
+<br/><br/><br/>
+## REQUIRMENTS
+- docker
+- docker-compose
+- git
 
-## 옵션 1 - 로컬 node 사용하여 개발하기
-0. nvm을 설치합니다.
-   - 맥: `brew install nvm`
-1. `nvm install --lts`
-2. `nvm use --lts`
-3. 저장소를 클론합니다.
-   - `git clone https://github.com/FiveNemos/nemo-express.git`
-4. 패키지를 설치합니다.
-   - `cd nemo-express`
-   - `npm install`
+<br/><br/><br/>
 
-## 옵션 2 - 도커로 프로젝트 설정하기
-1. 저장소를 클론합니다.
-   - `git clone https://github.com/FiveNemos/nemo-express.git`
+## HOW TO RUN(dev)
+```bash
+git clone https://github.com/FiveNemos/nemo-express.git
+cd nemo-express
+docker-compose -f docker-compose-dev.yml up --build
+```
+<br/><br/><br/>
 
-2. 클론한 저장소를 컨테이너에서 돌립니다.
-   - `docker run -itd -p 3000:3000 --restart=always -v {클론한 프로젝트 경로}/nemo-express:/nemo-express --name=api node:lts`
-   - `docker exec -it api /bin/bash`
+## HOW TO TEST
+```bash
+DOCKER_BUILDKIT=1 docker build -f Dockerfile-dev -t test .
+docker run test npm run test
+```
+<br/><br/><br/>
 
-3. 패키지를 설치합니다.
-   - `cd nemo-express`
-   - `npm install`
-
-4. 터미널을 종료합니다.
-
-## 프로젝트 코드 수정하기
-1. vscode의 extension인 docker와 remote-containers를 설치합니다.
-2. 왼쪽 탭에서 docker(고래모양)를 클릭합니다.
-3. idividual containers탭의 api 컨테이너를 우클릭합니다.
-4. Attach Visual Studio Code를 클릭합니다.
-5. 새롭게 열린 vscode에서 코드를 수정합니다.
-
-
-## 개발하기
-1. `npm run dev`
-2. 브라우저로 localhost:3000 접속하면 응답이 옵니다.
+## HOW TO DEPLOY
+```bash
+sh scripts/deploy.sh
+```
+<br/><br/><br/>
 
 ## Project Structure
-- 우리가 작업할 것들만
 ```
-├── bin/www             // 포트를 지정하고 서버를 실행하는 스크립트
-├── app.js              // root 앱, routes에서 생성한 라우터를 여기서 붙여준다
-├── routes              // 우리가 작업할 폴더.
-└── package.json        // npm install을 하면 이 파일을 참조해 패키질 설치합니다.
+├── bin/www.js          // 포트를 지정하고 서버를 실행하는 스크립트
+├── app.js              // root 앱, service들을 붙여준다.
+├── services            // 작성한 로직과 controller를 사용해 클라이언트에게 적절한 응답을 보내줌
+├── controllers         // db에 query를 날려 결과를 가져옴
+├── models              // database의 table 정의
+└── tests               // 테스트에서 사용하는 상수와 테스트 코드들
 ```
