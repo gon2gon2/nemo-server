@@ -11,7 +11,7 @@ export default client => {
   // client.join(data.Room);
   client.on('join', data => {
     console.log('join');
-    client.join(data.chatroom);
+    client.join(data);
   });
 
   // // listens for new messages coming in
@@ -19,7 +19,7 @@ export default client => {
     // client.join(data.Room);
     console.log(data);
     // socketIO.emit("message", data["chatmodel"]); // emit은 해당 방에 있는 사람한테만 보낸다>
-    client.to(data.chatroom).emit('message', data.chatmodel);
+    client.to(data.chatroomID).emit('message', data);
     // socketIO.to(data.Room).emit('message', data); // message란 이름으로 내보낸다.
   });
 
