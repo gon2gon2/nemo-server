@@ -5,9 +5,11 @@
  */
 
 import http from 'http';
+import { Server } from 'socket.io';
 import fs from 'fs';
 import app from '../app.js';
 import db from '../models/index.js';
+import chatService from '../services/chat.service.js';
 
 /**
  * Normalize a port into a number, string, or false.
@@ -41,7 +43,9 @@ app.set('port', port);
  */
 
 const server = http.createServer(app);
-app.io.attach(server);
+const socketIo = new Server(server);
+socketIo.on('connection', chatService);
+// app.io.attach(server);
 
 /**
  * Event listener for HTTP server "error" event.

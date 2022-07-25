@@ -1,6 +1,5 @@
 // const httpServer = require('http').createServer();
 // const socketIO = require('socket.io')(httpServer);
-import socketIO from 'socket.io';
 
 // UPPERNAME = EVENT NAME
 
@@ -15,12 +14,12 @@ export default client => {
     client.join(data.chatroom);
   });
 
-  // listens for new messages coming in
+  // // listens for new messages coming in
   client.on('message', data => {
     // client.join(data.Room);
     console.log(data);
     // socketIO.emit("message", data["chatmodel"]); // emit은 해당 방에 있는 사람한테만 보낸다>
-    socketIO.to(data.chatroom).emit('message', data.chatmodel);
+    client.to(data.chatroom).emit('message', data.chatmodel);
     // socketIO.to(data.Room).emit('message', data); // message란 이름으로 내보낸다.
   });
 

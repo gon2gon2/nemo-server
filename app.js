@@ -1,6 +1,5 @@
 import cookieParser from 'cookie-parser';
 import createError from 'http-errors';
-import { Server } from 'socket.io';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import logger from 'morgan';
@@ -11,7 +10,6 @@ import userService from './services/user.service.js';
 import cardService from './services/card.service.js';
 import tempService from './services/temp.service.js';
 import friendService from './services/friend.service.js';
-import chatService from './services/chat.service.js';
 
 // database
 /* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
@@ -21,9 +19,6 @@ import chatService from './services/chat.service.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
-
-// socket
-app.io = new Server();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,7 +53,5 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.io.on('connection', chatService);
 
 export default app;
