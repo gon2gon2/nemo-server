@@ -64,16 +64,19 @@ export default app => {
     }
   });
 
-  router.get('/lat', async (req, res) => {
-    const result = await connections.getAllPos();
+  /* 필요한 정보만 담아서 */
+  router.get('/locs', async (req, res) => {
+    const { user_id } = req.query;
+    const result = await connections.findAllFriends(user_id);
 
     const real = result.map(item => {
-      const { user_id_2, lat, lng } = item;
-      return { user_id: user_id_2, lat, lng };
+      const { user_id_2, lat, lng, connection_date } = item;
+      return { user_id: user_id_2, lat, lng, connection_date };
     }, result);
     res.send(real);
   });
 
+  /* 테스트 코드용 API */
   router.get('/length-for-test', async (req, res) => {
     const result = await connections.getLength();
     res.send({ result });
