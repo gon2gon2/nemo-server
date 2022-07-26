@@ -14,6 +14,11 @@ export default client => {
     client.join(data);
   });
 
+  client.on('leave', data => {
+    console.log('leave');
+    client.leave(data);
+  });
+
   // // listens for new messages coming in
   client.on('message', data => {
     // client.join(data.Room);
