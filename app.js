@@ -10,6 +10,7 @@ import userService from './services/user.service.js';
 import cardService from './services/card.service.js';
 import tempService from './services/temp.service.js';
 import friendService from './services/friend.service.js';
+import chatroomService from './services/chatroom.service.js';
 
 // database
 /* test시 오류가 나고, sync를 하지 않아도 db에서 데이터는 잘 가져옴. 
@@ -37,6 +38,7 @@ userService(app);
 cardService(app);
 tempService(app);
 friendService(app);
+chatroomService(app);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
