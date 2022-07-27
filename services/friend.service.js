@@ -82,5 +82,11 @@ export default app => {
     res.send({ result });
   });
 
+  router.get('/map', async (req, res) => {
+    const { user_id } = req.query;
+    const result = await connections.getMarkers(user_id);
+    res.send({ result });
+  });
+
   app.use('/api/friend', router);
 };
