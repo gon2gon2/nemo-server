@@ -13,6 +13,10 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    user_ids: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     connection_date: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
@@ -24,6 +28,11 @@ export default (sequelize, Sequelize) => {
     },
     lat: {
       type: Sequelize.DECIMAL(11, 5),
+      allowNull: false,
+    },
+    not_read_cnt: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
       allowNull: false,
     },
   });
