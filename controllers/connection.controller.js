@@ -7,7 +7,7 @@ Controller.getMarkers = async user_id => {
   const markers = await db.sequelize.query(
     `SELECT ca.nickname, ca.user_id, conn.lat, conn.lng, conn.connection_date FROM cards AS ca JOIN connections AS conn ON ca.user_id = conn.user_id_2 WHERE conn.user_id_1 = ${user_id}`,
   );
-  return markers;
+  return markers[0];
 };
 
 // user_id로 모든 친구들 다 찾아서 리턴
