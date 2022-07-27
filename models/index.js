@@ -5,6 +5,8 @@ import dbConfig from '../config/db.config.js';
 import User from './user.model.js';
 import Card from './card.model.js';
 import Connection from './connection.model.js';
+import Chatroom from './chatroom.model.js';
+import Chatmessage from './chatmessage.model.js';
 
 const sqlLog = process.env.NODE_ENV !== 'test';
 
@@ -25,5 +27,7 @@ db.sequelize = sequelize;
 db.User = User(sequelize, Sequelize);
 db.Card = Card(sequelize, Sequelize);
 db.Connection = Connection(sequelize, Sequelize);
+db.Chatroom = Chatroom(sequelize, Sequelize);
+db.Chatmessage = Chatmessage(sequelize, Sequelize);
 
 export default db;

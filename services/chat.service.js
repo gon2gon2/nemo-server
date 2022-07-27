@@ -1,3 +1,5 @@
+import connections from '../controllers/connection.controller.js';
+import chatmessages from '../controllers/chatmessage.controller.js';
 // const httpServer = require('http').createServer();
 // const socketIO = require('socket.io')(httpServer);
 
@@ -20,12 +22,24 @@ export default client => {
   });
 
   // // listens for new messages coming in
-  client.on('message', data => {
+  client.on('message', async data => {
     // client.join(data.Room);
-    console.log(data);
-    // socketIO.emit("message", data["chatmodel"]); // emit은 해당 방에 있는 사람한테만 보낸다>
+
+    await chatmessages.postMessage(
+      data.chatroomID,
+      data.senderID,
+      data.messagetext,
+    );
+
+    chatmessages.updateLastMsg(data.chatroomID, data.messagetext);
+    // controller에서 상대방의 connection을 찾는다
+    const connids = await connections.findConnectionId(
+      data.senderID,
+      data.receiverID,
+    );
+    connections.upreadCnt(connids[0]);
+    connections.resetreadCnt(connids[1]);
     client.to(data.chatroomID).emit('message', data);
-    // socketIO.to(data.Room).emit('message', data); // message란 이름으로 내보낸다.
   });
 
   // listens when a user is disconnected from the server
