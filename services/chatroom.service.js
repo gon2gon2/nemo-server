@@ -14,8 +14,9 @@ export default app => {
     let chatroomdata = await chatrooms.getChatList(user_id);
     console.log(chatroomdata);
     console.log('여기요 여기');
-    if (!chatroomdata) {
+    if (chatroomdata.length === 0) {
       res.send('false');
+	    return;
     }
     let rooms = chatroomdata.map(p => JSON.parse(p.connection_ids));
     const conns = [];
