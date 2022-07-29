@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  db:
+    image: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=spahxptmxm
+      - MYSQL_DATABASE=test_base
+    ports:
+      - 5342:3306
+
+  api:
+    image: gcr.io/red-seeker-356107/api:latest
+    container_name: api
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./config/.env
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+      - ./uploads:/nemo/uploads
+
