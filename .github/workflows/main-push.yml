@@ -45,12 +45,6 @@ jobs:
 
       # Push image to Google Container Registry
       - name: Push Image
-        # run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/api:$GITHUB_SHA
         run: docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/api:latest
 
-      # - name: 'Use gcloud CLI'
-      #   run: gcloud compute ssh --project=${{secrets.GCP_PROJECT_ID}} --zone=${{ secrets.GCP_REGION }} ${{ secrets.GCP_VM_NAME }}
-
-      # - name: 'pull image'
-      #   run: 'docker pull gcr.io/${{ secrets.GCP_PROJECT_ID }}/api:$GITHUB_SHA'
 
