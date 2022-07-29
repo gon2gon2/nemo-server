@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import connections from '../controllers/connection.controller.js';
 import cards from '../controllers/card.controller.js';
-import upload from './multer.js';
+import upload, { bucket } from './multer.js';
 
 const router = Router();
 
@@ -18,6 +18,12 @@ export default app => {
       tag_3,
     } = req.body;
 
+    const exist = await cards.findWithUserId(user_id);
+    if (exist) {
+      res.status(400).send('fail');
+      return;
+    }
+
     const data = {
       user_id,
       tag_1,
@@ -30,8 +36,16 @@ export default app => {
     };
 
     for (let i = 0; i < req.files.length; i += 1) {
-      const f = req.files[i];
-      data[f.fieldname] = f.filename;
+      const newFileName = `${Date.now()}-${req.files[0].originalname}`;
+      const blob = bucket.file(newFileName);
+      const blobStream = blob.createWriteStream();
+
+      blobStream.on('error', err => console.log(err));
+
+      blobStream.end(req.files[0].buffer);
+      data[
+        req.files[i].fieldname
+      ] = `${process.env.GCS_IMAGE_PREFIX}/${newFileName}`;
     }
 
     const result = await cards.create(data);
