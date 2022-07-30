@@ -43,9 +43,7 @@ export default app => {
       blobStream.on('error', err => console.log(err));
 
       blobStream.end(req.files[0].buffer);
-      data[
-        req.files[i].fieldname
-      ] = `${process.env.GCS_IMAGE_PREFIX}/${newFileName}`;
+      data[req.files[i].fieldname] = newFileName;
     }
 
     const result = await cards.create(data);
@@ -102,8 +100,14 @@ export default app => {
     };
 
     for (let i = 0; i < req.files.length; i += 1) {
-      const f = req.files[i];
-      data[f.fieldname] = f.filename;
+      const newFileName = `${Date.now()}-${req.files[0].originalname}`;
+      const blob = bucket.file(newFileName);
+      const blobStream = blob.createWriteStream();
+
+      blobStream.on('error', err => console.log(err));
+
+      blobStream.end(req.files[0].buffer);
+      data[req.files[i].fieldname] = newFileName;
     }
 
     const result = await cards.updateCard(data);
