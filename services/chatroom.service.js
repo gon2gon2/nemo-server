@@ -70,5 +70,12 @@ export default app => {
       }
     }
   });
+
+  router.get('/conns', async (req, res) => {
+    const { id_1, id_2 } = req.query;
+    const connids = await connections.findConnectionId(id_1, id_2);
+    res.send(connids);
+  });
+
   app.use('/api/chatroom', router);
 };

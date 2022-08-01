@@ -22,7 +22,7 @@ Controller.upreadCnt = async id => {
 
 Controller.getChatroomDatas = async (user_id, rooms) => {
   const result = await db.sequelize.query(
-    `SELECT ca.user_id, ca.nickname, ca.intro, ca.image FROM cards AS ca JOIN connections as conn ON ca.user_id = conn.user_id_2 WHERE conn.user_id_1 = ${user_id} and conn.id in (${rooms})`,
+    `SELECT ca.user_id, ca.nickname, ca.intro, ca.image, conn.not_read_cnt FROM cards AS ca JOIN connections as conn ON ca.user_id = conn.user_id_2 WHERE conn.user_id_1 = ${user_id} and conn.id in (${rooms})`,
   );
   return result;
 };
@@ -59,7 +59,7 @@ Controller.findConnectionId = async (user_id_1, user_id_2) => {
   const upConnId = upId.dataValues.id;
   const downConnId = downId.dataValues.id;
   // 여기서 not read cnt + 1해주기
-  return [upConnId, downConnId];
+  return [downConnId, upConnId];
 };
 /*     
     const getOppoId = await connections.findOpponentConnectionId(id_2, id_1);
