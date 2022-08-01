@@ -36,13 +36,13 @@ export default app => {
     };
 
     for (let i = 0; i < req.files.length; i += 1) {
-      const newFileName = `${Date.now()}-${req.files[0].originalname}`;
+      const newFileName = `${Date.now()}-${req.files[i].originalname}`;
       const blob = bucket.file(newFileName);
       const blobStream = blob.createWriteStream();
 
       blobStream.on('error', err => console.log(err));
 
-      blobStream.end(req.files[0].buffer);
+      blobStream.end(req.files[i].buffer);
       data[req.files[i].fieldname] = newFileName;
     }
 
@@ -100,13 +100,13 @@ export default app => {
     };
 
     for (let i = 0; i < req.files.length; i += 1) {
-      const newFileName = `${Date.now()}-${req.files[0].originalname}`;
+      const newFileName = `${Date.now()}-${req.files[i].originalname}`;
       const blob = bucket.file(newFileName);
       const blobStream = blob.createWriteStream();
 
       blobStream.on('error', err => console.log(err));
 
-      blobStream.end(req.files[0].buffer);
+      blobStream.end(req.files[i].buffer);
       data[req.files[i].fieldname] = newFileName;
     }
 
