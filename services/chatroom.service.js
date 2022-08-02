@@ -16,7 +16,7 @@ export default app => {
     console.log('여기요 여기');
     if (chatroomdata.length === 0) {
       res.send('false');
-	    return;
+      return;
     }
     let rooms = chatroomdata.map(p => JSON.parse(p.connection_ids));
     const conns = [];
@@ -60,10 +60,22 @@ export default app => {
       res.send(chatroom.id.toString()); // 참여할 채팅방 아이디만 돌려주면 되는경우
     } else {
       const connectionlist = await connections.findAllConnectionsIds(users);
-      const conns = JSON.stringify(connectionlist);
-      chatroom = await chatrooms.makeChatRoom(conns, users);
-      res.send(chatroom.id.toString());
+      if (connectionlist.length < 2) {
+        // 맞팔로우가 아닌 경우
+        res.send('0');
+      } else {
+        const conns = JSON.stringify(connectionlist);
+        chatroom = await chatrooms.makeChatRoom(conns, users);
+        res.send(chatroom.id.toString());
+      }
     }
   });
+
+  router.get('/conns', async (req, res) => {
+    const { id_1, id_2 } = req.query;
+    const connids = await connections.findConnectionId(id_1, id_2);
+    res.send(connids);
+  });
+
   app.use('/api/chatroom', router);
 };

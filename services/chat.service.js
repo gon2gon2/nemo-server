@@ -37,9 +37,13 @@ export default client => {
       data.senderID,
       data.receiverID,
     );
-    connections.upreadCnt(connids[0]);
-    connections.resetreadCnt(connids[1]);
+    connections.upreadCnt(connids[1]);
+    connections.resetreadCnt(connids[0]);
     client.to(data.chatroomID).emit('message', data);
+  });
+
+  client.on('reset', async data => {
+    connections.resetreadCnt(data);
   });
 
   // listens when a user is disconnected from the server
