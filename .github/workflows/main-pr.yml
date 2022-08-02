@@ -1,4 +1,4 @@
-name: Node.js CI
+name: main PR
 
 on:
   pull_request:
@@ -16,6 +16,4 @@ jobs:
       with:
         node-version: 'lts/gallium'
     - run: npm i
-    - run: echo $NODE_ENV
-    - run: echo $TEST_HOST
     - run: npm run test
