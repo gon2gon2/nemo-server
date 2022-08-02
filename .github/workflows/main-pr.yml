@@ -15,5 +15,14 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 'lts/gallium'
-    - run: npm i
-    - run: npm run test
+    - name: install dependencies
+      run:  npm i
+
+    - name: run test
+      env:
+        TEST_USERNAME: ${{ TEST_USERNAME }}
+        TEST_TEST_ROOT_PASSWORD: ${{ TEST_TEST_ROOT_PASSWORD }}
+        TEST_HOST: ${{ TEST_HOST }}
+        TEST_PORT: ${{ TEST_PORT }}
+        TEST_DATABASE: ${{ TEST_DATABASE }}
+      run: npm run test
