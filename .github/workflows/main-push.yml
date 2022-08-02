@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: main push
 
 # Controls when the workflow will run
 on:
@@ -37,16 +37,6 @@ jobs:
 
       - name: Build Image
         run: docker build \
-            -e MYSQL_HOST=${{secrets.MYSQL_HOST}} \
-            -e MYSQL_PORT=${{secrets.MYSQL_PORT}} \
-            -e MYSQL_ROOT_PASSWORD=${{secrets.MYSQL_ROOT_PASSWORD}} \
-            -e MYSQL_USERNAME=${{secrets.MYSQL_USERNAME}} \
-            -e MYSQL_DATABASE=${{secrets.MYSQL_DATABASE}} \
-            -e GCS_PROJECT_ID=${{secrets.PROJECT_ID}} \
-            -e GCS_BUCKET_NAME=${{secrets.BUCKET_NAME}} \
-            -e GCS_GCS_IMAGE_PREFIX=${{secrets.GCS_IMAGE_PREFIX}} \
-            -e GCS_PRIVATE_KEY=${{secrets.GCS_PRIVATE_KEY}}
-            -e GCP_PROJECT_ID=${{secrets.GCP_PROJECT_ID}} \
             -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/api:latest .
 
       # Configure docker to use the gcloud command-line tool as a credential helper
