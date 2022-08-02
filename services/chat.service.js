@@ -50,6 +50,7 @@ export default client => {
 
   client.on('reset', async data => {
     connections.resetreadCnt(data);
+    client.to(data.chatroomID).emit('reset', 'read');
   });
 
   // listens when a user is disconnected from the server
