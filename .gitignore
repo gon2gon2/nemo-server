@@ -11,7 +11,7 @@ coverage
 benchmarks/graphs
 
 # .env
-# .env
+.env
 
 # db
 db
