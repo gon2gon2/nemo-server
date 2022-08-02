@@ -21,8 +21,8 @@ jobs:
     - name: run test
       run: npm run test
       env:
-        TEST_USERNAME: ${{ TEST_USERNAME }}
-        TEST_TEST_ROOT_PASSWORD: ${{ TEST_TEST_ROOT_PASSWORD }}
-        TEST_HOST: ${{ TEST_HOST }}
-        TEST_PORT: ${{ TEST_PORT }}
-        TEST_DATABASE: ${{ TEST_DATABASE }}
+        - TEST_USERNAME: ${{ TEST_USERNAME }}
+        - TEST_TEST_ROOT_PASSWORD: ${{ TEST_TEST_ROOT_PASSWORD }}
+        - TEST_HOST: ${{ TEST_HOST }}
+        - TEST_PORT: ${{ TEST_PORT }}
+        - TEST_DATABASE: ${{ TEST_DATABASE }}
