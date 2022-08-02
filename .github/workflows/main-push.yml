@@ -36,8 +36,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
 
       - name: Build Image
-        run: docker build \
-            -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/api:latest .
+        run: docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/api:latest .
 
       # Configure docker to use the gcloud command-line tool as a credential helper
 
