@@ -80,12 +80,10 @@ export default app => {
     res.send(connids);
   });
 
-  router.get('/readcnts', async (req, res) => {
+    router.get('/readcnts', async (req, res) => {
     const { id_1, id_2 } = req.query;
     const notReadCnt = await connections.getreadCnt(id_1, id_2);
-    res.send({
-      notreadcnt: notReadCnt.toString(),
-    });
+    res.send({notReadCnt});
   });
 
   app.use('/api/chatroom', router);

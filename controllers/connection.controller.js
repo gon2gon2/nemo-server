@@ -5,18 +5,13 @@ const { Connection, Sequelize } = db;
 
 // Controller.findAllConnections = async user_id
 Controller.getreadCnt = async (id_1, id_2) => {
-  const upId = await Connection.findOne({
-    attributes: ['id'],
+  const result = await Connection.findOne({
     where: { user_id_2: id_1, user_id_1: id_2 }, // 상대방의 not_read_cnt 얻기위해 상대방-나 connection id 찾기
   });
-  const result = await db.sequelize.query(
-    `SELECT not_read_cnt FROM connections WHERE id = ${upId};`,
-  );
-  return result;
+  return result.dataValues.not_read_cnt;
 };
 
 Controller.resetreadCnt = async id => {
-  console.log('here');
   const result = await db.sequelize.query(
     `UPDATE connections SET not_read_cnt = 0 WHERE id = ${id};`,
   );
