@@ -57,10 +57,9 @@ export default app => {
     chatroom = await chatrooms.findChatRoom(users);
     // 여기서 chatroom을 못찾아서 비어있으면 생성해주기
     if (chatroom != null) {
-      const notReadCnt = await connections.getreadCnt(id_1, id_2);
+      // const notReadCnt = await connections.getreadCnt(id_1, id_2);
       res.send({
         chatroomID: chatroom.id.toString(),
-        notreadcnt: notReadCnt.toString(),
       }); // 참여할 채팅방 아이디만 돌려주면 되는경우
     } else {
       const connectionlist = await connections.findAllConnectionsIds(users);
@@ -79,6 +78,14 @@ export default app => {
     const { id_1, id_2 } = req.query;
     const connids = await connections.findConnectionId(id_1, id_2);
     res.send(connids);
+  });
+
+  router.get('/readcnts', async (req, res) => {
+    const { id_1, id_2 } = req.query;
+    const notReadCnt = await connections.getreadCnt(id_1, id_2);
+    res.send({
+      notreadcnt: notReadCnt.toString(),
+    });
   });
 
   app.use('/api/chatroom', router);
