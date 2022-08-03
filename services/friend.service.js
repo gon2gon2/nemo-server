@@ -62,9 +62,13 @@ export default app => {
   router.get('/delete', async (req, res) => {
     const { id_1, id_2 } = req.query;
 
-    const result = !(await connections.isFriend(id_1, id_2))
+    let result = !(await connections.isFriend(id_1, id_2))
       ? true
       : await connections.disconnect(id_1, id_2);
+
+    if (result) {
+      result = await chatrooms.deleteRoom(id_1, id_2);
+    }
 
     if (result) {
       res.status(200).send({ result: 'success' });
