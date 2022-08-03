@@ -16,6 +16,12 @@ export default client => {
     client.join(data);
   });
 
+  client.on('took', data => {
+    console.log('took');
+    client.to(data.chatroomID).emit('took', data);
+    client.emit('took', data);
+  });
+
   client.on('leave', data => {
     console.log('leave');
     client.leave(data);
@@ -44,6 +50,7 @@ export default client => {
 
   client.on('reset', async data => {
     connections.resetreadCnt(data);
+    client.to(data.chatroomID).emit('reset', 'read');
   });
 
   // listens when a user is disconnected from the server

@@ -4,6 +4,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  TEST_USERNAME: ${{ secrets.TEST_USERNAME }}
+  TEST_TEST_ROOT_PASSWORD: ${{ secrets.TEST_TEST_ROOT_PASSWORD }}
+  TEST_HOST: ${{ secrets.TEST_HOST }}
+  TEST_PORT: ${{ secrets.TEST_PORT }}
+  TEST_DATABASE: ${{ secrets.TEST_DATABASE }}
+
 jobs:
   build:
 
@@ -15,5 +22,8 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 'lts/gallium'
-    - run: npm i
-    - run: npm run test
+    - name: install dependencies
+      run:  npm i
+
+    - name: run test
+      run: npm run test

@@ -5,7 +5,7 @@ const Controller = {};
 const { Op } = db.Sequelize;
 
 Controller.create = async data => {
-  const { account_name, password, phone_number } = data;
+  const { account_name, password, phone_number, salt } = data;
 
   if (!account_name || !password || !phone_number) {
     return [false, '누락된 정보가 있습니다'];
@@ -21,6 +21,7 @@ Controller.create = async data => {
     account_name,
     password,
     phone_number,
+    salt,
   });
   if (!new_user) {
     return [false, '생성에 실패했습니다. 다시 시도해주세요'];
