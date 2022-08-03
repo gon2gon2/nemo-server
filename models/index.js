@@ -4,6 +4,7 @@ import dbConfig from '../config/db.config.js';
 // 우리가 정의한 모델들(테이블)
 import User from './user.model.js';
 import Card from './card.model.js';
+import Report from './report.model.js';
 import Connection from './connection.model.js';
 import Chatroom from './chatroom.model.js';
 import Chatmessage from './chatmessage.model.js';
@@ -26,6 +27,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.User = User(sequelize, Sequelize);
 db.Card = Card(sequelize, Sequelize);
+db.Report = Report(sequelize, Sequelize);
 db.Connection = Connection(sequelize, Sequelize);
 db.Chatroom = Chatroom(sequelize, Sequelize);
 db.Chatmessage = Chatmessage(sequelize, Sequelize);

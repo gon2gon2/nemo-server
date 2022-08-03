@@ -69,5 +69,15 @@ Controller.getChatList = async user_id => {
 */
 
 // Controller.registerMessage = async chatroom_id => {};
+Controller.deleteRoom = async (user_id_1, user_id_2) => {
+  const idintlist = [user_id_1, user_id_2].map(i => parseInt(i, 10));
+  function sortId(id1, id2) {
+    return id1 - id2;
+  }
+  idintlist.sort(sortId);
+  const users = JSON.stringify(idintlist);
+  const result = await Chatroom.destroy({ where: { user_ids: users } });
+  return result;
+};
 
 export default Controller;
