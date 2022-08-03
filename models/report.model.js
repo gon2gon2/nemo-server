@@ -13,7 +13,7 @@ export default (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    reason: {
+    title: {
       type: Sequelize.STRING,
       allowNull: false,
     },
