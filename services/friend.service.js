@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import connections from '../controllers/connection.controller.js';
 import chatrooms from '../controllers/chatroom.controller.js';
+import reports from '../controllers/report.controller.js';
 
 const router = Router();
 
@@ -99,6 +100,29 @@ export default app => {
     const { user_id } = req.query;
     const result = await connections.getMarkers(user_id);
     res.send({ result });
+  });
+
+  router.post('/report', async (req, res) => {
+    const { reporter_id, reportee_id, title, detail } = req.body;
+
+    const result = await reports.create({
+      reporter_id,
+      reportee_id,
+      title,
+      detail,
+    });
+    switch (result) {
+      case 0:
+        res.send({ result: 'fail', msg: '다시 시도해주세요.' });
+        break;
+      case 1:
+        res.send({ result: 'success', msg: '신고 완료!' });
+        break;
+      case 2:
+        res.send({ result: 'fail', msg: '이미 신고하였습니다.' });
+        break;
+      default:
+    }
   });
 
   app.use('/api/friend', router);
