@@ -49,7 +49,7 @@ export default client => {
   });
 
   client.on('reset', async data => {
-    connections.resetreadCnt(data);
+    connections.resetreadCnt(data.connid);
     client.to(data.chatroomID).emit('reset', 'read');
   });
 
