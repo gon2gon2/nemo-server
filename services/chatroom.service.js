@@ -57,16 +57,20 @@ export default app => {
     chatroom = await chatrooms.findChatRoom(users);
     // 여기서 chatroom을 못찾아서 비어있으면 생성해주기
     if (chatroom != null) {
-      res.send(chatroom.id.toString()); // 참여할 채팅방 아이디만 돌려주면 되는경우
+      const notReadCnt = await connections.getreadCnt(id_1, id_2);
+      res.send({
+        chatroomID: chatroom.id.toString(),
+        notreadcnt: notReadCnt.toString(),
+      }); // 참여할 채팅방 아이디만 돌려주면 되는경우
     } else {
       const connectionlist = await connections.findAllConnectionsIds(users);
       if (connectionlist.length < 2) {
         // 맞팔로우가 아닌 경우
-        res.send('0');
+        res.send({ chatroomID: '0', notreadcnt: '0' });
       } else {
         const conns = JSON.stringify(connectionlist);
         chatroom = await chatrooms.makeChatRoom(conns, users);
-        res.send(chatroom.id.toString());
+        res.send({ chatroomID: chatroom.id.toString(), notreadcnt: '0' });
       }
     }
   });
