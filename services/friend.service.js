@@ -48,7 +48,18 @@ export default app => {
       const idintlist = idlist.map(i => parseInt(i, 10));
       idintlist.sort(sortId);
       const ids = JSON.stringify(idintlist);
-      result = await connections.connect(id_1, id_2, ids, lat, lng);
+      let nowlat;
+      let nowlng;
+
+      if (lat !== '' && lng !== '') {
+        nowlat = lat;
+        nowlng = lng;
+      } else {
+        nowlat = '39.74023';
+        nowlng = '134.33323';
+      }
+
+      result = await connections.connect(id_1, id_2, ids, nowlat, nowlng);
     }
 
     // 하나만 남기기. 하나만 남길수있게되면 그때 메세지방으로 본격적으로 활용.
