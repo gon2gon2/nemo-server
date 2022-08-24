@@ -1,16 +1,13 @@
-import Multer from 'multer';
-import { Storage } from '@google-cloud/storage';
+import multer from 'multer';
+import path from 'path';
 
-const storage = new Storage({
-  projectId: process.env.GCP_PROJECT_ID,
-  credentials: {
-    client_email: process.env.CLIENT_EMAIL,
-    private_key: process.env.GCS_PRIVATE_KEY.replace(/\\n/gm, '\n'),
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
   },
-});
+  filename: (req, file, cb) => {
 
-export const bucket = storage.bucket(process.env.GCS_BUCKET_NAME);
-
-export default Multer({
-  storage: Multer.memoryStorage(),
-});
+    cb(null, `${Date.now()}-${ (Math.random() + 1).toString(36).substring(7) + path.extname(file.originalname) }`);  
+}
+})
+export default multer({ storage }); 

@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import connections from '../controllers/connection.controller.js';
 import cards from '../controllers/card.controller.js';
-import upload, { bucket } from './multer.js';
+import upload from './multer.js';
 
 const router = Router();
 
@@ -36,14 +36,19 @@ export default app => {
     };
 
     for (let i = 0; i < req.files.length; i += 1) {
-      const newFileName = `${Date.now()}-${req.files[i].originalname}`;
-      const blob = bucket.file(newFileName);
-      const blobStream = blob.createWriteStream();
+      /* 로컬 저장 */
+      const f = req.files[i];
+      data[f.fieldname] = f.filename;
+      
+      /* VM에 저장 */
+      // const newFileName = `${Date.now()}-${req.files[i].originalname}`;
+      // const blob = bucket.file(newFileName);
+      // const blobStream = blob.createWriteStream();
 
-      blobStream.on('error', err => console.log(err));
+      // blobStream.on('error', err => console.log(err));
 
-      blobStream.end(req.files[i].buffer);
-      data[req.files[i].fieldname] = newFileName;
+      // blobStream.end(req.files[i].buffer);
+      // data[req.files[i].fieldname] = newFileName;
     }
 
     const result = await cards.create(data);
@@ -100,14 +105,19 @@ export default app => {
     };
 
     for (let i = 0; i < req.files.length; i += 1) {
-      const newFileName = `${Date.now()}-${req.files[i].originalname}`;
-      const blob = bucket.file(newFileName);
-      const blobStream = blob.createWriteStream();
+      /* 로컬에 저장하는 경우 */
+      const f = req.files[i];
+      data[f.fieldname] = f.filename;
 
-      blobStream.on('error', err => console.log(err));
+      /* GCS에 저장하는 경우 */
+      // const newFileName = `${Date.now()}-${req.files[i].originalname}`;
+      // const blob = bucket.file(newFileName);
+      // const blobStream = blob.createWriteStream();
 
-      blobStream.end(req.files[i].buffer);
-      data[req.files[i].fieldname] = newFileName;
+      // blobStream.on('error', err => console.log(err));
+
+      // blobStream.end(req.files[i].buffer);
+      // data[req.files[i].fieldname] = newFileName;
     }
 
     const result = await cards.updateCard(data);
