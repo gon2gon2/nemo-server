@@ -1,5 +1,6 @@
 # nemo-express
-- 네모의 API 서버입니다.
+- 정글 최종 프로젝트 나만의 무기 만들기에서 진행한 네모의 서버 레포지토리입니다.
+- 팀원들과 작업했던 레포지토리를 미러링한 레포지토리입니다.
 
 <br/><br/><br/>
 
@@ -7,10 +8,20 @@
 - docker
 - docker-compose
 - git
+- ".env" file
 
 <br/><br/><br/>
 
 ## HOW TO RUN(dev)
+1. config 폴더 내에 .env 파일을 생성하시고, 아래 내용을 붙여넣어주세요
+```
+DEV_HOST=db
+DEV_PORT=3306
+DEV_USERNAME=root
+DEV_ROOT_PASSWORD=spahxptmxm
+DEV_DATABASE=test_base
+```
+2. 아래 커맨드르 입력하세요.
 ```bash
 git clone https://github.com/FiveNemos/nemo-express.git
 cd nemo-express
@@ -40,3 +51,8 @@ sh scripts/deploy.sh
 ├── models              // database의 table 정의
 └── tests               // 테스트에서 사용하는 상수와 테스트 코드들
 ```
+
+## References
+[당시 레포](https://github.com/FiveNemos/nemo-express)
+[포스터]()
+[발표영상](https://youtu.be/_I6NU67zvJQ)
