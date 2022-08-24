@@ -24,7 +24,6 @@ DEV_DATABASE=test_base
 ```
 2. 아래 커맨드를 입력하세요.
 ```bash
-git clone https://github.com/FiveNemos/nemo-express.git
 cd nemo-express
 docker-compose -f docker-compose-dev.yml up --build
 ```
