@@ -59,7 +59,6 @@ Controller.findFriends = async account_id => {
     const tag_2 = tagObj_2.tag_name;
     const tag_3 = tagObj_3.tag_name;
 
-    // console.log({tag_id_1, tag_id_2, tag_id_3 });
     const converted = {
       nickname,
       image,

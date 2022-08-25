@@ -1,9 +1,5 @@
 import connections from '../controllers/connection.controller.js';
 import chatmessages from '../controllers/chatmessage.controller.js';
-// const httpServer = require('http').createServer();
-// const socketIO = require('socket.io')(httpServer);
-
-// UPPERNAME = EVENT NAME
 
 // CONNECTION : 연결이 발생하면, 연결된 클라이언트를 띄워준다
 export default client => {
@@ -29,7 +25,6 @@ export default client => {
 
   // // listens for new messages coming in
   client.on('message', async data => {
-    // client.join(data.Room);
 
     await chatmessages.postMessage(
       data.chatroomID,

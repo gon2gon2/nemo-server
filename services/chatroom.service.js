@@ -1,7 +1,5 @@
 import { Router } from 'express';
 import connections from '../controllers/connection.controller.js';
-import cards from '../controllers/card.controller.js';
-import upload from './multer.js';
 import chatrooms from '../controllers/chatroom.controller.js';
 import chatmessages from '../controllers/chatmessage.controller.js';
 
@@ -13,7 +11,6 @@ export default app => {
     const { user_id } = req.query;
     let chatroomdata = await chatrooms.getChatList(user_id);
     console.log(chatroomdata);
-    console.log('여기요 여기');
     if (chatroomdata.length === 0) {
       res.send('false');
       return;

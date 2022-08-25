@@ -1,6 +1,5 @@
 import sequelize from 'sequelize';
 import db from '../models/index.js';
-import connections from './connection.controller.js';
 
 const Controller = {};
 const { Chatroom } = db;
@@ -62,11 +61,6 @@ Controller.getChatList = async user_id => {
   //   const ids = friends.map(item => item.dataValues.user_id_2);
   return final_rooms; // 대화를 한번이라도 한 적이 있는 채팅방만 리턴
 };
-/* 
-    const rooms = await chatrooms.getChatList(id_1);
-    console.log('chatlist');
-    console.log(rooms);
-*/
 
 // Controller.registerMessage = async chatroom_id => {};
 Controller.deleteRoom = async (user_id_1, user_id_2) => {

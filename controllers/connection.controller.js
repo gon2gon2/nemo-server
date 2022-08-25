@@ -57,25 +57,15 @@ Controller.findConnectionId = async (user_id_1, user_id_2) => {
     attributes: ['id'],
     where: { user_id_1, user_id_2 },
   });
-  console.log(user_id_1);
 
-  console.log(user_id_2);
-
-  console.log('why');
   const upConnId = upId.dataValues.id;
   const downConnId = downId.dataValues.id;
   // 여기서 not read cnt + 1해주기
   return [downConnId, upConnId];
 };
-/*     
-    const getOppoId = await connections.findOpponentConnectionId(id_2, id_1);
-    console.log('hi');
-    console.log(getOppoId); 
-*/
 
 Controller.findAllFriends = async user_id => {
   const friends = await Connection.findAll({ where: { user_id_1: user_id } });
-  console.log(friends);
   return friends;
 };
 
