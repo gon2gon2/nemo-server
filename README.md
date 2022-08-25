@@ -1,6 +1,7 @@
 # nemo-express
 - 정글 최종 프로젝트 나만의 무기 만들기에서 진행한 네모의 서버 레포지토리입니다.
 - 팀원들과 작업했던 레포지토리를 미러링하여 일부 수정했습니다.
+- [포스터 보기](https://github.com/gon2gon2/nemo-server/blob/main/assets/%ED%8F%AC%EC%8A%A4%ED%84%B0-pdf.pdf)
 
 <br/>
 
@@ -23,7 +24,6 @@ DEV_DATABASE=test_base
 ```
 2. 아래 커맨드를 입력하세요.
 ```bash
-git clone https://github.com/FiveNemos/nemo-express.git
 cd nemo-express
 docker-compose -f docker-compose-dev.yml up --build
 ```
@@ -59,5 +59,4 @@ sh scripts/deploy.sh
 
 ## References
 - [당시 레포](https://github.com/FiveNemos/nemo-express)
-- [포스터 보기](https://github.com/gon2gon2/nemo-server/blob/main/assets/%ED%8F%AC%EC%8A%A4%ED%84%B0-pdf.pdf)
 - [발표영상](https://youtu.be/_I6NU67zvJQ)
