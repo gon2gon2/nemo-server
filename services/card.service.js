@@ -70,12 +70,14 @@ export default app => {
   // 친구들 정보 불러오기
   router.get('/all/:user_id', async (req, res) => {
     const { user_id } = req.params;
+    const {page} = req.query;
+
     const ids = await connections.findAllFriendsId(user_id);
     if (!ids.length) {
       res.send('no friend');
     } else {
-      const allCards = await cards.findCards(ids);
-      res.send({ cards: allCards, friends: ids });
+      const allCards = await cards.findCards(ids, page-1);
+      res.send({ cards: allCards });
     }
   });
 
