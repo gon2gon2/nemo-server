@@ -69,6 +69,7 @@ sh scripts/deploy.sh
 ## 수정사항
 
 - [친구들 다 불러오지 않고 일부만 불러오게 페이지 적용](https://github.com/gon2gon2/nemo-server/issues/6)
+- [계정 중복 생성(동시성) 문제 해결](https://github.com/gon2gon2/nemo-server/issues/8)
 
 <br/>
 
