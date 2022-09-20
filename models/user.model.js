@@ -8,6 +8,7 @@ export default (sequelize, Sequelize) => {
     account_name: {
       type: Sequelize.STRING,
       allowNull: false,
+      unique: true,
     },
     password: {
       type: Sequelize.STRING,
